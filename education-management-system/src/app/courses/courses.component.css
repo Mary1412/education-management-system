@@ -1,0 +1,10 @@
+.menu{
+    display:inline-block;
+    text-align: right;
+}
+
+mat-card{
+    padding: 10px;
+    margin-bottom: 15px;
+    width: 80%;
+}
