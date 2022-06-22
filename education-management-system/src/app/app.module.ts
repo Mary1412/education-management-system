@@ -16,6 +16,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -24,7 +25,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     AppComponent,
     MenuComponent,
     CoursesComponent,
-    UsersComponent
+    UsersComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

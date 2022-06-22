@@ -13,12 +13,29 @@ import { User } from './user';
 export class UsersComponent implements OnInit {
 
   users: User[] = [];
-
+  role:string=""
  
 
   constructor(private service:AppServiceService ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {/*
+    this.role=String(localStorage.getItem('roleForE')).split('"').join('');
+    if (this.role=="admin"){
+      (<HTMLInputElement>document.getElementById('v22')).style.display="inline";
+    }
+    if (this.role=="user"){
+      (<HTMLInputElement>document.getElementById('v22')).style.display="none";
+    }
+    if (this.role=="manager"){
+      (<HTMLInputElement>document.getElementById('v22')).style.display="none";
+    }*/
+
+    this.role=String(localStorage.getItem('roleForE')).split('"').join('');
+    console.log(this.role+'aaa')
+
+    
+
+
 this.getDataFromAPI();
 this.getUsers();
   }
@@ -92,7 +109,7 @@ this.getUsers();
     (<HTMLInputElement>document.getElementById('courses')).value=user.courses;
     (<HTMLInputElement>document.getElementById('email')).value=user.email;
     (<HTMLInputElement>document.getElementById('tel')).value=user.tel;
-    
+
     ((<HTMLInputElement>document.getElementById('id1')).value)=String(user.id);
     let v1=(<HTMLInputElement>document.getElementById('v1')).style.display="block"
     let v4=(<HTMLInputElement>document.getElementById('v3')).style.display="block"

@@ -11,12 +11,30 @@ import { Cours } from './cours';
 export class CoursesComponent implements OnInit {
 
   courses: Cours[] = [];
-
+  role1:string=""
  
 
   constructor(private service:AppServiceService ) { }
 
   ngOnInit(): void {
+    this.role1=String(localStorage.getItem('roleForE')).split('"').join('');
+    console.log(this.role1+" 4")
+   
+/*
+    if (this.role=="admin"){
+      (<HTMLInputElement>document.getElementById('v22')).style.display="inline";
+    }
+    if (this.role=="user"){
+      (<HTMLInputElement>document.getElementById('v22')).style.display="none";
+    }
+    if (this.role=="manager"){
+      (<HTMLInputElement>document.getElementById('v22')).style.display="none";
+    }*/
+
+    
+
+
+
 this.getDataFromAPI();
 this.getCourses();
   }
