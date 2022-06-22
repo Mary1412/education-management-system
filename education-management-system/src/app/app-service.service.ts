@@ -2,6 +2,7 @@ import { Cours } from './courses/cours';
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { User } from './users/user';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,46 @@ export class AppServiceService {
 
   updateHero(cours: Cours): Observable<any> {
     return this.http.put('/api/cours', cours)
+  }
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  getUsesr(): Observable<User[]> {
+    return this.http.get<User[]>('/api/users')
+      
+  }
+
+  deleteUsesr(id: number): Observable<User> {
+    const url = `/api/users/${id}`;
+
+    return this.http.delete<User>(url);
+  }
+
+
+  addUsesr(user: User): Observable<User> {
+    return this.http.post<User>('/api/users', user);
+  }
+
+  updateUser(user: User): Observable<any> {
+    return this.http.put('/api/users', user)
   }
 
 }
