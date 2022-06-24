@@ -11,25 +11,31 @@ import { Cours } from './cours';
 export class CoursesComponent implements OnInit {
 
   courses: Cours[] = [];
-  role1:string=""
+  role:string=""
  
 
   constructor(private service:AppServiceService ) { }
 
   ngOnInit(): void {
-    this.role1=String(localStorage.getItem('roleForE')).split('"').join('');
-    console.log(this.role1+" 4")
+    this.role=String(localStorage.getItem('roleForE')).split('"').join('');
+    console.log(this.role+" 4")
    
-/*
+
     if (this.role=="admin"){
-      (<HTMLInputElement>document.getElementById('v22')).style.display="inline";
+      (<HTMLInputElement>document.getElementById('vv33')).style.display="block";
+      (<HTMLInputElement>document.getElementById('v2')).style.display="block";
+      
     }
     if (this.role=="user"){
-      (<HTMLInputElement>document.getElementById('v22')).style.display="none";
+      (<HTMLInputElement>document.getElementById('v2')).style.display="none";
+      (<HTMLInputElement>document.getElementById('vv33')).style.display="none";
+      
     }
     if (this.role=="manager"){
-      (<HTMLInputElement>document.getElementById('v22')).style.display="none";
-    }*/
+      (<HTMLInputElement>document.getElementById('v2')).style.display="block";
+      (<HTMLInputElement>document.getElementById('vv33')).style.display="none";
+      
+    }
 
     
 
@@ -48,8 +54,13 @@ this.getCourses();
   }
 
   getCourses(): void {
+ 
     this.service.getCourses()
-    .subscribe(courses => this.courses = courses);
+    .subscribe(courses => {this.courses = courses;
+    })
+      ;
+
+    
   }
 
   delete(cours: Cours): void {

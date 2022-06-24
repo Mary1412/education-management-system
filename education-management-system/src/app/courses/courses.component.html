@@ -1,4 +1,4 @@
-<app-menu></app-menu>
+<app-menu  ></app-menu>
 
 <div id="v1" style="display: none;" >
 <div>
@@ -32,21 +32,21 @@
     </button>
 <br>
 </div>
-<div>
+<div   id="vv33" style="display: none;">
     <button id="v2" style="display: block;" mat-fab color="primary" type="button" class="add-button" (click)="add();">
       <mat-icon>add</mat-icon>
     </button>
 </div>
   
-
+<div id="v77" ></div>
    
   
 <br><br>
 <div id="v5" style="display: block;">
 
-      <mat-card    *ngFor="let cours of courses">
-      <div class="menu">
-          <button  mat-icon-button color="primary" type="button" class="delete" title="delete cours"
+      <mat-card   *ngFor="let cours of courses">
+      <div class="menu" *ngIf="role!='user'" id="v77" style="display:inline ;"  >
+          <button   mat-icon-button color="primary" type="button" class="delete" title="delete cours"
           (click)="delete(cours)"><mat-icon>delete</mat-icon></button>
 
           <button   mat-icon-button color="primary" type="button" class="delete" title="delete cours"
