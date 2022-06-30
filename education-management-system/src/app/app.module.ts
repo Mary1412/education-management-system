@@ -17,6 +17,13 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { LoginComponent } from './login/login.component';
+import { DialogInvComponent } from './dialog-inv/dialog-inv.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatSelectModule} from '@angular/material/select';
+import { FilterPipe } from './filter.pipe';
+import { FilterPipe2 } from './filter2.pipe';
+import { InvaintComponent } from './invaint/invaint.component';
+
 
 
 
@@ -26,8 +33,14 @@ import { LoginComponent } from './login/login.component';
     MenuComponent,
     CoursesComponent,
     UsersComponent,
-    LoginComponent
+    LoginComponent,
+    DialogInvComponent,
+    FilterPipe,
+    FilterPipe2,
+    InvaintComponent,
+    
   ],
+  entryComponents:[DialogInvComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -41,7 +54,9 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule,
     MatIconModule,
     MatTabsModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatDialogModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,48 +1,66 @@
 <app-menu></app-menu>
 
 
-
+<fieldset [formGroup]="uControl" style="border: 0px;">
 <div id="v1" style="display: none;" >
     <div>
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label for="new-hero"> Name: </mat-label>
-        <input matInput id="name" #name /><br>
+        <input formControlName="name" required matInput id="name" #name />
+        <mat-error *ngIf="uControl">
+          required
+        </mat-error><br>
         </mat-form-field>
     </div>
     <div>
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label for="new-hero">Surname: </mat-label>
-        <input matInput id="surname" #surname ><br>
+        <input formControlName="surname" required matInput id="surname" #surname >
+        <mat-error *ngIf="uControl">
+          required
+        </mat-error><br>
         </mat-form-field>
     </div>
     <div>
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label for="new-hero">Login: </mat-label>
-        <input matInput id="login" #login ><br>
+        <input formControlName="login" required matInput id="login" #login >
+        <mat-error *ngIf="uControl">
+          required
+        </mat-error><br>
         </mat-form-field>
     </div>
     <div>
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label for="new-hero">Role: </mat-label>
-        <input matInput id="role" #role ><br>
+        <input formControlName="role" required matInput id="role" #role >
+        <mat-error *ngIf="uControl">
+          required
+        </mat-error><br>
         </mat-form-field>
     </div>
     <div>
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label for="new-hero">Courses: </mat-label>
-        <input matInput id="courses" #courses ><br>
+        <input matInput id="courses"  #courses ><br>
         </mat-form-field>
     </div>
     <div>
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label for="new-hero">Email: </mat-label>
-        <input matInput id="email" #email ><br>
+        <input matInput formControlName="email" required id="email" #email >
+        <mat-error *ngIf="uControl">
+         not correct email
+        </mat-error><br>
         </mat-form-field>
     </div>
     <div>
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label for="new-hero">Tel: </mat-label>
-        <input matInput id="tel" #tel ><br>
+        <input matInput id="tel" formControlName="tel" #tel required >
+        <mat-error *ngIf="uControl">
+          required
+        </mat-error><br>
         </mat-form-field>
     </div>
     
@@ -56,11 +74,13 @@
         <button id="v3" style="display: none;"  mat-raised-button color="primary" type="button" class="add-button" (click)="save(id1.value, name.value, surname.value, login.value, role.value, courses.value, email.value, tel.value); surname.value=''; role.value=''; courses.value=''; email.value=''; tel.value=''; login.value=''; name.value='' ">
           save
         </button>
-        <button  id="v4" style="display: none;"  mat-raised-button color="primary" type="button" class="add-button" (click)="savea(name.value, surname.value, login.value, role.value, courses.value, email.value, tel.value); surname.value=''; role.value=''; courses.value=''; email.value=''; tel.value=''; login.value=''; name.value='' ">
+        <button  id="v4" style="display: none;" [disabled]="!uControl.valid"  mat-raised-button color="primary" type="button" class="add-button" (click)="savea(name.value, surname.value, login.value, role.value, courses.value, email.value, tel.value); surname.value=''; role.value=''; courses.value=''; email.value=''; tel.value=''; login.value=''; name.value='' ">
         save
         </button>
+     
     <br>
     </div>
+  </fieldset>
     <div>
         <button id="v2" style="display: block;" mat-fab color="primary" type="button" class="add-button" (click)="add();">
           <mat-icon>add</mat-icon>
@@ -73,15 +93,14 @@
     <br><br>
     <div id="v5" style="display: block;">
     
-          <mat-card    *ngFor="let user of users">
+          <mat-card    *ngFor="let user of users| slice: 1">
           <div class="menu">
               <button  mat-icon-button color="primary" type="button" class="delete" title="delete user"
               (click)="delete(user)"><mat-icon>delete</mat-icon></button>
     
               <button   mat-icon-button color="primary" type="button" class="delete" title="delete user"
               (click)="edit(user)"><mat-icon>create</mat-icon></button>
-              <button  mat-icon-button color="primary" type="button" class="delete" title="delete user"
-              ><mat-icon>group_add</mat-icon></button>
+              
           </div>
           <br>
             Name: {{user.name}}<br>

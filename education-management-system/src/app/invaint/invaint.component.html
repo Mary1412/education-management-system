@@ -1,0 +1,31 @@
+
+
+
+
+
+<div id="v1" align="center" style="margin-top: 150px; display: block;">
+    <fieldset [formGroup]="logControl" style="border: 0px;">
+      <div>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label for="new-hero">Login </mat-label>
+            <input matInput id="login1" formControlName="loginFormControl" required #login >
+            <mat-error *ngIf="logControl">
+              only letters, digits, required
+            </mat-error><br>
+            </mat-form-field>
+        </div>
+        <div>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label for="new-hero">Password </mat-label>
+          <input matInput type="password" id="password" #pasword required  formControlName="pas1FormControl" >
+          <mat-error *ngIf="logControl">
+            required
+          </mat-error><br>
+          </mat-form-field>
+      </div>
+      
+        <button style="display: block;"  [disabled]="!logControl.valid" mat-raised-button color="primary" routerLink="/courses" type="button" class="add-button" (click)="add1();">
+          login
+         </button>
+       </fieldset>
+      </div>

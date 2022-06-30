@@ -1,7 +1,10 @@
-import { emitDistinctChangesOnlyDefaultValue, ThisReceiver } from '@angular/compiler';
+
 import { Component, OnInit } from '@angular/core';
 import { AppServiceService } from '../app-service.service';
+import { DialogInvComponent } from '../dialog-inv/dialog-inv.component';
 import { Cours } from './cours';
+import { MatDialog } from '@angular/material/dialog';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-courses',
@@ -11,30 +14,60 @@ import { Cours } from './cours';
 export class CoursesComponent implements OnInit {
 
   courses: Cours[] = [];
+  courses2: Cours[] = [];
+  courses3: Cours[] = [];
   role:string=""
+  auth:string=""
+  role2:string=""
+  auth2:string=""
+  uCours:string="";
+  str:string=""
+  dialog: any;
+
+  now:Date=new Date();
+
+  cControl=new FormGroup({
+    name : new FormControl('', [Validators.required]),
+    plan : new FormControl('', [Validators.required]),
+    test : new FormControl('', [Validators.required])
+  })
  
 
-  constructor(private service:AppServiceService ) { }
+  constructor(private service:AppServiceService,  public dialog1: MatDialog ) { }
 
   ngOnInit(): void {
     this.role=String(localStorage.getItem('roleForE')).split('"').join('');
-    console.log(this.role+" 4")
+    this.auth=String(localStorage.getItem('logForE')).split('"').join('');
+    this.uCours=String(localStorage.getItem('uCours')).split('"').join('');
+
+    let v11=(<HTMLInputElement>document.getElementById('test')).value;
+    
+
    
 
-    if (this.role=="admin"){
+    
+   
+
+    if (this.role=="admin" || this.role=="rootadmin"){
       (<HTMLInputElement>document.getElementById('vv33')).style.display="block";
       (<HTMLInputElement>document.getElementById('v2')).style.display="block";
+      this.uCours="";
       
     }
     if (this.role=="user"){
       (<HTMLInputElement>document.getElementById('v2')).style.display="none";
       (<HTMLInputElement>document.getElementById('vv33')).style.display="none";
+      this.uCours=String(localStorage.getItem('uCours')).split('"').join('');
+      
       
     }
     if (this.role=="manager"){
       (<HTMLInputElement>document.getElementById('v2')).style.display="block";
-      (<HTMLInputElement>document.getElementById('vv33')).style.display="none";
+      (<HTMLInputElement>document.getElementById('vv33')).style.display="block";
+      this.uCours="";
       
+      this.role2=String(localStorage.getItem('roleForE')).split('"').join('');
+      this.auth2=String(localStorage.getItem('logForE')).split('"').join('');
     }
 
     
@@ -53,14 +86,123 @@ this.getCourses();
        } ) 
   }
 
+
+  invite(cours: Cours):void{
+    let dr=this.dialog1.open(DialogInvComponent);
+    //(<HTMLInputElement>document.getElementById('name')).value=cours.name;
+
+    const idc = JSON.stringify(cours.id)
+    localStorage.setItem('idc', idc)
+    
+    
+
+    dr.afterClosed().subscribe((result: any) => {
+     })
+    }
+       
+      
+
+  qq(){
+
+    let str = 'html css javascript';
+    let arr = str.split(' ');
+
+console.log(arr);
+
+    let str2=String(localStorage.getItem('uCours'));
+    console.log(str2+"kk");
+    let newstr = str2.replace(/"/g,"");
+    console.log(newstr+" new");
+
+    let uCours2: string | any[]=[]
+    uCours2.concat(newstr.split(' '));
+    console.log(uCours2+" arr");
+
+
+    let one = ['one', 'Cours 2', 'three', 'adminM', 'five'];
+    let two = ['a', 'b', 'five', 'c', 'one'];
+    one.sort();
+    two.sort();
+    let i = uCours2.length, j = this.courses.length, three = [];
+    while (i > 0 && j > 0) {
+        i--;
+        j--;
+        if (uCours2[i] > this.courses[j].name) j++;
+        else if (uCours2[i] < this.courses[j].name) i++;
+        else three.push(uCours2[i]);
+    }
+    console.log(three);
+
+    var array = [2,4];
+    var arrayHtml = '';
+   
+    for ( i=0; i<this.courses.length; i++) {
+      if(this.courses[i].id==array[i]){
+      var element = this.courses[i].name;
+      var element2 = this.courses[i].plan;
+        arrayHtml += '<div>' + i + ':' + element+'<br>' +  element2 + '</div>';
+    }}
+    //document.body.innerHTML = arrayHtml ;
+    (<HTMLInputElement>document.getElementById('uf')).innerHTML=arrayHtml ;
+
+
+
+
+
+
+
+
+
+   /* 
+
+    for( let i=0; i<this.courses2.length; i++){
+      if(this.courses2[i]!=undefined){
+        console.log(this.courses2[i]+" 7") 
+        this.courses3[i]=this.courses2[i];
+      }
+      console.log(this.courses2[i]+" 77") 
+      
+       
+    }*/
+
+  }
+
   getCourses(): void {
  
-    this.service.getCourses()
-    .subscribe(courses => {this.courses = courses;
-    })
-      ;
-
+    this.auth=String(localStorage.getItem('logForE')).split('"').join('');
     
+    this.now= new Date();
+    this.service.getCourses()
+    .subscribe(courses => {
+
+      this.courses= courses;
+
+     
+
+      for( let i=0; i<this.courses.length; i++){
+        if (this.courses[i].auth==this.auth ){
+          this.courses2[i]=this.courses[i];
+          console.log(this.courses2[i]+" 5") 
+         }
+      }
+
+  
+
+
+      for( let i=0; i<this.courses.length; i++){
+      //  console.log(Math.ceil( ((new Date(this.courses[i].test).getTime())-this.now.getTime())/ (1000 * 3600 * 24)))
+
+        if (Math.ceil( ((new Date(this.courses[i].test).getTime())-this.now.getTime())/ (1000 * 3600 * 24))<5 && Math.ceil( ((new Date(this.courses[i].test).getTime())-this.now.getTime())/ (1000 * 3600 * 24))>0){
+        //  (<HTMLInputElement>document.getElementById('a')).click(); 
+        alert("You have a test" ) ;
+        break;      
+      }
+      }
+
+    });
+
+
+
   }
 
   delete(cours: Cours): void {
@@ -95,11 +237,14 @@ this.getCourses();
     let v4=(<HTMLInputElement>document.getElementById('v4')).style.display="none"
     let v5=(<HTMLInputElement>document.getElementById('v5')).style.display="block"
 
+    this.auth=String(localStorage.getItem('logForE')).split('"').join('');
+
     name = name.trim();
     plan = plan.trim();
+    let auth = this.auth.trim();
     test = test.trim();
     if (!plan || !name || !test) { return; }
-    this.service.addCours({ name, plan, test } as Cours)
+    this.service.addCours({ name, plan, auth, test } as Cours)
       .subscribe(cours => {
         this.courses.push(cours);
       });

@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CoursesComponent } from './courses/courses.component';
+import { InvaintComponent } from './invaint/invaint.component';
 import { LoginComponent } from './login/login.component';
 import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
   { path: 'courses', component:CoursesComponent},
   { path: 'login', component:LoginComponent},
+  { path: String(localStorage.getItem('urlInv')).split('"').join(''), component:InvaintComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full'},
   { path: 'users', component:UsersComponent},
 ];

@@ -1,0 +1,8 @@
+mat-card{
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    display:inline-block;
+}

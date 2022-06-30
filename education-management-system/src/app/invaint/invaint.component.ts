@@ -4,11 +4,11 @@ import { AppServiceService } from '../app-service.service';
 import { User } from '../users/user';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-invaint',
+  templateUrl: './invaint.component.html',
+  styleUrls: ['./invaint.component.css']
 })
-export class LoginComponent implements OnInit {
+export class InvaintComponent implements OnInit {
 
   constructor(private service:AppServiceService ) { }
 
@@ -54,9 +54,9 @@ export class LoginComponent implements OnInit {
 
     const jsonData1 = JSON.stringify(this.uLogin)
     localStorage.setItem('logForE', jsonData1)
-  /*  
+    
     const jsonData22 = JSON.stringify(this.uCours)
-    localStorage.setItem('uCours', jsonData22)**/
+    localStorage.setItem('uCours', jsonData22)
      });
 
   }

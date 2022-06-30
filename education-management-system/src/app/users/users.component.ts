@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { emitDistinctChangesOnlyDefaultValue, ThisReceiver } from '@angular/compiler';
 import { AppServiceService } from '../app-service.service';
 import { User } from './user';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 
 
@@ -15,6 +16,16 @@ export class UsersComponent implements OnInit {
   users: User[] = [];
   role:string=""
  
+
+  uControl=new FormGroup({
+    name : new FormControl('', [Validators.required]),
+    surname : new FormControl('', [Validators.required]),
+    login : new FormControl('', [Validators.required]),
+    role : new FormControl('', [Validators.required]),
+    
+    email : new FormControl('', [Validators.email]),
+    tel : new FormControl('', [Validators.required])
+  })
 
   constructor(private service:AppServiceService ) { }
 
