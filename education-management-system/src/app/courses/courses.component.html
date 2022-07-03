@@ -34,7 +34,7 @@
     </mat-form-field>
     <input matInput id="id1" #id1 style="visibility: hidden ;" /><br>
   </div>
-    <!-- (click) passes input value to add() and then clears the input -->
+ 
 
     <button id="v3" style="display: none;"  mat-raised-button color="primary" type="button" class="add-button" (click)="save(id1.value, name.value, plan.value, test.value); plan.value=''; test.value=''; name.value='' ">
       save
@@ -50,19 +50,12 @@
       <mat-icon>add</mat-icon>
     </button>
 </div>
-  
-<div id="v77" ></div>
-   
-<button (click)="qq()">qq</button>
-
-<div id="uf"></div>
-
  
 <a href="mailto:1" id="a" style="display: none;"></a>
 <br><br>
 <div id="v5" style="display: block;">
 
-      <mat-card   *ngFor="let cours of courses | filter:auth2 |filter2: uCours  ">
+      <mat-card   *ngFor="let cours of courses | filter:authForUsers |filter2: uCours  ">
       <div class="menu" *ngIf="role!='user'" id="v77" style="display:inline ;"  >
           <button   mat-icon-button color="primary" type="button" class="delete" title="delete cours"
           (click)="delete(cours)"><mat-icon>delete</mat-icon></button>

@@ -14,14 +14,14 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class CoursesComponent implements OnInit {
 
   courses: Cours[] = [];
-  courses2: Cours[] = [];
-  courses3: Cours[] = [];
+
+
   role:string=""
   auth:string=""
-  role2:string=""
-  auth2:string=""
+  roleForUsers:string=""
+  authForUsers:string=""
   uCours:string="";
-  str:string=""
+
   dialog: any;
 
   now:Date=new Date();
@@ -66,35 +66,24 @@ export class CoursesComponent implements OnInit {
       (<HTMLInputElement>document.getElementById('vv33')).style.display="block";
       this.uCours="";
       
-      this.role2=String(localStorage.getItem('roleForE')).split('"').join('');
-      this.auth2=String(localStorage.getItem('logForE')).split('"').join('');
+      this.roleForUsers=String(localStorage.getItem('roleForE')).split('"').join('');
+      this.authForUsers=String(localStorage.getItem('logForE')).split('"').join('');
     }
 
     
 
 
 
-this.getDataFromAPI();
+
 this.getCourses();
   }
 
-  getDataFromAPI(){
-      this.service.getData().subscribe((response)=>{
-        console.log('Response from API is ',response)
-      },(error)=>{
-        console.log('Error',error);
-       } ) 
-  }
 
 
   invite(cours: Cours):void{
     let dr=this.dialog1.open(DialogInvComponent);
-    //(<HTMLInputElement>document.getElementById('name')).value=cours.name;
-
     const idc = JSON.stringify(cours.id)
     localStorage.setItem('idc', idc)
-    
-    
 
     dr.afterClosed().subscribe((result: any) => {
      })
@@ -102,71 +91,7 @@ this.getCourses();
        
       
 
-  qq(){
-
-    let str = 'html css javascript';
-    let arr = str.split(' ');
-
-console.log(arr);
-
-    let str2=String(localStorage.getItem('uCours'));
-    console.log(str2+"kk");
-    let newstr = str2.replace(/"/g,"");
-    console.log(newstr+" new");
-
-    let uCours2: string | any[]=[]
-    uCours2.concat(newstr.split(' '));
-    console.log(uCours2+" arr");
-
-
-    let one = ['one', 'Cours 2', 'three', 'adminM', 'five'];
-    let two = ['a', 'b', 'five', 'c', 'one'];
-    one.sort();
-    two.sort();
-    let i = uCours2.length, j = this.courses.length, three = [];
-    while (i > 0 && j > 0) {
-        i--;
-        j--;
-        if (uCours2[i] > this.courses[j].name) j++;
-        else if (uCours2[i] < this.courses[j].name) i++;
-        else three.push(uCours2[i]);
-    }
-    console.log(three);
-
-    var array = [2,4];
-    var arrayHtml = '';
-   
-    for ( i=0; i<this.courses.length; i++) {
-      if(this.courses[i].id==array[i]){
-      var element = this.courses[i].name;
-      var element2 = this.courses[i].plan;
-        arrayHtml += '<div>' + i + ':' + element+'<br>' +  element2 + '</div>';
-    }}
-    //document.body.innerHTML = arrayHtml ;
-    (<HTMLInputElement>document.getElementById('uf')).innerHTML=arrayHtml ;
-
-
-
-
-
-
-
-
-
-   /* 
-
-    for( let i=0; i<this.courses2.length; i++){
-      if(this.courses2[i]!=undefined){
-        console.log(this.courses2[i]+" 7") 
-        this.courses3[i]=this.courses2[i];
-      }
-      console.log(this.courses2[i]+" 77") 
-      
-       
-    }*/
-
-  }
-
+ 
   getCourses(): void {
  
     this.auth=String(localStorage.getItem('logForE')).split('"').join('');
@@ -176,24 +101,9 @@ console.log(arr);
     .subscribe(courses => {
 
       this.courses= courses;
-
-     
-
-      for( let i=0; i<this.courses.length; i++){
-        if (this.courses[i].auth==this.auth ){
-          this.courses2[i]=this.courses[i];
-          console.log(this.courses2[i]+" 5") 
-         }
-      }
-
-  
-
-
-      for( let i=0; i<this.courses.length; i++){
-      //  console.log(Math.ceil( ((new Date(this.courses[i].test).getTime())-this.now.getTime())/ (1000 * 3600 * 24)))
+    for( let i=0; i<this.courses.length; i++){
 
         if (Math.ceil( ((new Date(this.courses[i].test).getTime())-this.now.getTime())/ (1000 * 3600 * 24))<5 && Math.ceil( ((new Date(this.courses[i].test).getTime())-this.now.getTime())/ (1000 * 3600 * 24))>0){
-        //  (<HTMLInputElement>document.getElementById('a')).click(); 
         alert("You have a test" ) ;
         break;      
       }
@@ -261,9 +171,9 @@ console.log(arr);
     let v4=(<HTMLInputElement>document.getElementById('v3')).style.display="block"
     let v5=(<HTMLInputElement>document.getElementById('v5')).style.display="none"
     
-    console.log(cours);
+    
     return cours;
-   // console.log((<HTMLInputElement>document.getElementById('name')).value)
+  
 
   }
 

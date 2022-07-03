@@ -35,8 +35,7 @@ export class DialogInvComponent implements OnInit {
 time:number=0
 
   invaint(user: User):void{
-    //let time2=(<HTMLInputElement>document.getElementById('time')).value;
-    //
+ 
     this.url="http://localhost:4200/invaint";
     console.log(this.url);
     setTimeout(this.url1, 1000*this.time*60*60*24);
