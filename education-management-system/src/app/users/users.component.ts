@@ -16,13 +16,14 @@ export class UsersComponent implements OnInit {
   users: User[] = [];
   role:string=""
  
+  strsearch="";
 
   uControl=new FormGroup({
     name : new FormControl('', [Validators.required]),
     surname : new FormControl('', [Validators.required]),
     login : new FormControl('', [Validators.required]),
     role : new FormControl('', [Validators.required]),
-    
+    password : new FormControl('', [Validators.required]),
     email : new FormControl('', [Validators.email]),
     tel : new FormControl('', [Validators.required])
   })
@@ -78,19 +79,19 @@ this.getUsers();
   }
 
 
-  save(id1:string, name: string, surname: string, login :string, role: string, courses:string, email:string, tel:string): void {
+  save(id1:string, name: string, surname: string, login :string, role: string, password:string, courses:string, email:string, tel:string): void {
     
     let v1=(<HTMLInputElement>document.getElementById('v1')).style.display="none"
     let v3=(<HTMLInputElement>document.getElementById('v3')).style.display="none"
     let v5=(<HTMLInputElement>document.getElementById('v5')).style.display="block"
     const id=Number(id1);
-    this.service.updateUser({ id, name, surname, login, role, courses, email, tel }  as User)
+    this.service.updateUser({ id, name, surname, login, role,  password, courses, email, tel }  as User)
     .subscribe();
     this.getUsers();
   }
 
 
-  savea(name: string, surname: string, login :string, role: string, courses:string, email:string, tel:string): void {
+  savea(name: string, surname: string, login :string, role: string, password:string, courses:string, email:string, tel:string): void {
     let v1=(<HTMLInputElement>document.getElementById('v1')).style.display="none"
     let v2=(<HTMLInputElement>document.getElementById('v2')).style.display="block"
     let v4=(<HTMLInputElement>document.getElementById('v4')).style.display="none"
@@ -104,7 +105,7 @@ this.getUsers();
     email = email.trim();
     tel = tel.trim();
     if (!surname || !name || !login || !role || !courses || !email || !tel) { return; }
-    this.service.addUsesr({ name, surname, login, role, courses, email, tel } as User)
+    this.service.addUsesr({ name, surname, login, role, password, courses, email, tel } as User)
       .subscribe(user => {
         this.users.push(user);
       });
@@ -117,6 +118,7 @@ this.getUsers();
     (<HTMLInputElement>document.getElementById('surname')).value=user.surname;
     (<HTMLInputElement>document.getElementById('login')).value=user.login;
     (<HTMLInputElement>document.getElementById('role')).value=user.role;
+    (<HTMLInputElement>document.getElementById('password')).value=user.password;
     (<HTMLInputElement>document.getElementById('courses')).value=user.courses;
     (<HTMLInputElement>document.getElementById('email')).value=user.email;
     (<HTMLInputElement>document.getElementById('tel')).value=user.tel;

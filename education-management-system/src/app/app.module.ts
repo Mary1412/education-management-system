@@ -23,6 +23,15 @@ import {MatSelectModule} from '@angular/material/select';
 import { FilterPipe } from './filter.pipe';
 import { FilterPipe2 } from './filter2.pipe';
 import { InvaintComponent } from './invaint/invaint.component';
+import {MatMenuModule} from '@angular/material/menu';
+import { SearchPipe } from './search.pipe';
+import { SearchUsersPipe } from './searchUsers.pipe';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { DialogDeleteComponent } from './dialog-delete/dialog-delete.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatTableModule} from '@angular/material/table';
+import { NgxPermissionsModule } from 'ngx-permissions';
+
 
 
 
@@ -38,6 +47,9 @@ import { InvaintComponent } from './invaint/invaint.component';
     FilterPipe,
     FilterPipe2,
     InvaintComponent,
+    SearchPipe,
+    SearchUsersPipe,
+    DialogDeleteComponent
     
   ],
   entryComponents:[DialogInvComponent],
@@ -56,7 +68,12 @@ import { InvaintComponent } from './invaint/invaint.component';
     MatTabsModule,
     MatDatepickerModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    MatMenuModule,
+    MatPaginatorModule,
+    MatCheckboxModule,
+    MatTableModule,
+    NgxPermissionsModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

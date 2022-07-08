@@ -1,7 +1,7 @@
 .menu{
     display:inline-block;
     text-align: right;
-    
+    float: right;
 }
 
 
@@ -29,3 +29,16 @@ mat-card{
     margin: 10px;
     display:inline-block;
 }
+
+#vv33{
+    position: fixed;
+    bottom: 60px;
+    right: 70px;
+    z-index: 1;
+     
+}
+
+
+table {
+    width: 100%;
+  }

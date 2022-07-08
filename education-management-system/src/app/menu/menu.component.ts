@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { SomeDataService } from '../some-data.service';
 
 @Component({
   selector: 'app-menu',
@@ -6,22 +7,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+  strsearch=""
 
-  constructor() { }
+  @Output() valueChanged = new EventEmitter<string>();
+
+  setnewstrsearch(newstrsearch: string) {
+    this.valueChanged.emit(this.strsearch);
+  }
+
+  constructor(private someSrv: SomeDataService) { }
 
   role:string="";
+  login="";
 
   ngOnInit(): void {
-    this.role=String(localStorage.getItem('roleForE')).split('"').join('');
-    if (this.role=="admin"){
-      (<HTMLInputElement>document.getElementById('v22')).style.display="inline";
-    }
-    if (this.role=="user"){
-      (<HTMLInputElement>document.getElementById('v22')).style.display="none";
-    }
-    if (this.role=="manager"){
-      (<HTMLInputElement>document.getElementById('v22')).style.display="none";
-    }
+    this.role=this.someSrv.role;
+    this.login=String(localStorage.getItem('logForE')).split('"').join('');
+
 
    
 

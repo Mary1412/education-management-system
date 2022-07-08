@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth/auth.guard';
 import { CoursesComponent } from './courses/courses.component';
 import { InvaintComponent } from './invaint/invaint.component';
 import { LoginComponent } from './login/login.component';
 import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
-  { path: 'courses', component:CoursesComponent},
+  { path: 'courses', component:CoursesComponent, canActivate: [AuthGuard]},
   { path: 'login', component:LoginComponent},
   { path: String(localStorage.getItem('urlInv')).split('"').join(''), component:InvaintComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full'},
-  { path: 'users', component:UsersComponent},
+  { path: 'users', component:UsersComponent , canActivate: [AuthGuard]},
 ];
 
 @NgModule({

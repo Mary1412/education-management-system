@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AppServiceService } from '../app-service.service';
+import { SomeDataService } from '../some-data.service';
 import { User } from '../users/user';
 
 @Component({
@@ -10,17 +12,23 @@ import { User } from '../users/user';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private service:AppServiceService ) { }
+  constructor(private service:AppServiceService, private someSrv: SomeDataService, private router: Router) { }
 
   ngOnInit(): void {
-    
+    this.someSrv.data = 0
+    this.someSrv.role = ""
+    this.errL=0
   }
 
+  errL=0;
 
   users: User[] = [];
   uLogin:string="";
+  uPassword=""
+  password=""
   role:string="";
   uCours:string="";
+  checkEnter=0;
   
   logControl=new FormGroup({
     loginFormControl : new FormControl('', [Validators.required, Validators.pattern('^[а-яА-ЯёЁa-zA-Z0-9]+$')]),
@@ -33,21 +41,38 @@ export class LoginComponent implements OnInit {
 
   add1(){
    
-    this.uLogin=(<HTMLInputElement>document.getElementById('login1')).value;
+    
     
     this.service.getUsesr()
     .subscribe(users => {this.users = users;
       
       for( let i=0; i<this.users.length; i++){
         if (this.users[i].login==this.uLogin ){
-          this.role=this.users[i].role;
+          //this.role=this.users[i].role;
+          this.someSrv.role = this.users[i].role;
           this.uCours=this.users[i].courses;
-          //console.log(this.users[i].login)
+          this.password=this.users[i].password;
            break;
          }
       }
-      location.reload();
-      console.log("role "+this.role)
+
+    
+      if(this.password==this.uPassword){
+        this.someSrv.data = 1
+        this.router.navigate(['/courses']);
+      }
+      else{
+        this.errL=1
+      }
+        
+  
+      
+
+
+
+
+    
+      
 
     const jsonData5 = JSON.stringify(this.role)
     localStorage.setItem('roleForE', jsonData5)
