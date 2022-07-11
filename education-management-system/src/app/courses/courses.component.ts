@@ -150,6 +150,9 @@ this.getCourses();
       }
       }
 
+
+     
+
     });
 
 
@@ -184,11 +187,12 @@ this.getCourses();
    this.roundtn=0;
   
   }
-  save(id1:string, name: string, plan: string, test:string): void {
+  save(id1:string, name: string, plan1: string, test:string): void {
     
  
     const id=Number(id1);
-    this.service.updateHero({ id, name, plan, test }  as Cours)
+    let plan = plan1.split(",");
+    this.service.updateHero({ id, name, plan, test }   as Cours)
     .subscribe();
     this.getCourses();
     this.edited=0;
@@ -205,19 +209,20 @@ this.getCourses();
   buttonAdd=0;
   roundtn=1;
 
-  savea(name: string, plan: string, test: string): void {
+  savea(name: string, plan1: string, test: string): void {
 
 
     this.auth=String(localStorage.getItem('logForE')).split('"').join('');
 
     name = name.trim();
-    plan = plan.trim();
+    let plan = plan1.split(",");
     let auth = this.auth.trim();
     test = test.trim();
     if (!plan || !name || !test) { return; }
     this.service.addCours({ name, plan, auth, test } as Cours)
       .subscribe(cours => {
         this.courses.push(cours);
+        this.getCourses();
       });
       this.edited=0;
       this.buttonAdd=0;
