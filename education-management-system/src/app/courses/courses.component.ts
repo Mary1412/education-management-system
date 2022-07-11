@@ -10,6 +10,7 @@ import { DialogDeleteComponent } from '../dialog-delete/dialog-delete.component'
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { SomeDataService } from '../some-data.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 
 
@@ -22,7 +23,8 @@ export class CoursesComponent implements OnInit {
 
 
     courses: Cours[] = [];
-  pageSlice: Cours[]=[];
+    pageSlice: Cours[] = [];
+  pageSlice2$!: Observable<Cours[]>;
   len=0;
 
 
@@ -33,6 +35,7 @@ export class CoursesComponent implements OnInit {
   uCours:string="";
 
   strsearch="";
+
   
 
 
@@ -47,7 +50,10 @@ export class CoursesComponent implements OnInit {
   })
  
 
-  constructor(private service:AppServiceService,  public dialog1: MatDialog , private someSrv: SomeDataService) { }
+  constructor(public service:AppServiceService,  public dialog1: MatDialog , private someSrv: SomeDataService) { }
+  
+
+ 
 
  
 
@@ -61,12 +67,20 @@ export class CoursesComponent implements OnInit {
     this.pageSlice=this.courses.slice(startIndex, endIndex);
   }
 
+
+  
+ 
+
   ngOnInit(): void {
+
+ //setTimeout(loading, 1000);
 
     this.auth=String(localStorage.getItem('logForE')).split('"').join('');
     this.uCours=String(localStorage.getItem('uCours')).split('"').join('');
 
     this.role=this.someSrv.role;
+
+   
     
 
     this.service.getCourses()
@@ -142,7 +156,10 @@ this.getCourses();
     this.service.getCourses()
    .subscribe(courses => this.pageSlice=courses.slice(0,3) );
 
+   
+
   }
+
 
   delete(cours: Cours): void {
     let dr=this.dialog1.open(DialogDeleteComponent);
@@ -167,8 +184,6 @@ this.getCourses();
    this.roundtn=0;
   
   }
-
-
   save(id1:string, name: string, plan: string, test:string): void {
     
  
@@ -232,3 +247,5 @@ this.getCourses();
 
 
 }
+
+

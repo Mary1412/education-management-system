@@ -31,6 +31,8 @@ import { DialogDeleteComponent } from './dialog-delete/dialog-delete.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTableModule} from '@angular/material/table';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 
@@ -73,6 +75,8 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     MatPaginatorModule,
     MatCheckboxModule,
     MatTableModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
     NgxPermissionsModule.forRoot()
   ],
   providers: [],

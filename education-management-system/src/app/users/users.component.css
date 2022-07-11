@@ -11,3 +11,41 @@
     z-index: 1;
      
 }
+
+
+
+@keyframes fade {
+    from {
+     
+      visibility: visible;
+    }
+    to {
+     
+      visibility: hidden;
+    }
+  }
+  
+ mat-progress-bar {
+    animation: fade 2s  forwards;
+  }
+
+
+
+  
+  .tb {
+    animation: show 2s 1; 
+    animation-fill-mode: forwards; 
+    animation-delay: 2s; 
+    visibility:hidden;
+  
+  }
+
+
+    @keyframes show{
+        0%{
+            visibility: hidden;
+        }
+        100% {
+            visibility: visible;
+        }
+        }

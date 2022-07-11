@@ -1,13 +1,14 @@
 import { Cours } from './courses/cours';
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from './users/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppServiceService {
+  public isLoading:BehaviorSubject<boolean>=new BehaviorSubject<boolean>(true);
 
   constructor( private http:HttpClient) { }
 

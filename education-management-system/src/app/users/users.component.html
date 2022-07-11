@@ -1,6 +1,9 @@
 <app-menu (valueChanged)="strsearch = $event"></app-menu>
 
 
+
+
+
 <fieldset [formGroup]="uControl" style="border: 0px;">
 <div id="v1" style="display: none;" >
     <div>
@@ -100,6 +103,8 @@
        
       
     <br><br>
+    <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>  
+    <div class="tb" >
     <div id="v5" style="display: block;">
     
           <mat-card    *ngFor="let user of users| slice: 1 |searchUsers: strsearch ">
@@ -122,4 +127,4 @@
             Tel: {{user.tel}}<br>
            
             </mat-card>
-          </div>
+          </div></div>
