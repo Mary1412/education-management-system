@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   uPassword=""
   password=""
   role:string="";
-  uCours:string="";
+  uCours:string[] | undefined;
   checkEnter=0;
   
   logControl=new FormGroup({
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
         if (this.users[i].login==this.uLogin ){
           //this.role=this.users[i].role;
           this.someSrv.role = this.users[i].role;
-          this.uCours=this.users[i].courses;
+         this.uCours=this.users[i].courses;
           this.password=this.users[i].password;
            break;
          }

@@ -27,6 +27,8 @@ export class CoursesComponent implements OnInit {
   pageSlice2$!: Observable<Cours[]>;
   len=0;
 
+  showU:Cours[] | any= [] ;
+
 
   role:string=""
   auth:string=""
@@ -159,6 +161,12 @@ this.getCourses();
     this.service.getCourses()
    .subscribe(courses => this.pageSlice=courses.slice(0,3) );
 
+ 
+   
+
+   this.service.getCourses()
+   .subscribe(courses => this.showU=courses.filter(item => item.user.find(item2 => item2 == this.auth) ));
+
    
 
   }
@@ -187,12 +195,14 @@ this.getCourses();
    this.roundtn=0;
   
   }
-  save(id1:string, name: string, plan1: string, test:string): void {
+  save(id1:string, name: string, plan1: string, test:string, user1:string): void {
     
- 
+    this.auth=String(localStorage.getItem('logForE')).split('"').join('');
     const id=Number(id1);
     let plan = plan1.split(",");
-    this.service.updateHero({ id, name, plan, test }   as Cours)
+    let user = user1.split(",");
+    let auth = this.auth.trim();
+    this.service.updateHero({ id, name, plan, auth, test, user}   as Cours)
     .subscribe();
     this.getCourses();
     this.edited=0;
@@ -209,17 +219,18 @@ this.getCourses();
   buttonAdd=0;
   roundtn=1;
 
-  savea(name: string, plan1: string, test: string): void {
+  savea(name: string, plan1: string, test: string, user1:string): void {
 
 
     this.auth=String(localStorage.getItem('logForE')).split('"').join('');
 
     name = name.trim();
     let plan = plan1.split(",");
+    let user = user1.split(",");
     let auth = this.auth.trim();
     test = test.trim();
     if (!plan || !name || !test) { return; }
-    this.service.addCours({ name, plan, auth, test } as Cours)
+    this.service.addCours({ name, plan, auth, test, user } as Cours)
       .subscribe(cours => {
         this.courses.push(cours);
         this.getCourses();

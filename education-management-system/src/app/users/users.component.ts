@@ -43,22 +43,16 @@ export class UsersComponent implements OnInit {
     }*/
 
     this.role=String(localStorage.getItem('roleForE')).split('"').join('');
-    console.log(this.role+'aaa')
+   
 
     
 
 
-this.getDataFromAPI();
+
 this.getUsers();
   }
 
-  getDataFromAPI(){
-      this.service.getData().subscribe((response)=>{
-        console.log('Response from API is ',response)
-      },(error)=>{
-        console.log('Error',error);
-       } ) 
-  }
+
 
   getUsers(): void {
     this.service.getUsesr()
@@ -79,19 +73,20 @@ this.getUsers();
   }
 
 
-  save(id1:string, name: string, surname: string, login :string, role: string, password:string, courses:string, email:string, tel:string): void {
+  save(id1:string, name: string, surname: string, login :string, role: string, password:string, courses1:string, email:string, tel:string): void {
     
     let v1=(<HTMLInputElement>document.getElementById('v1')).style.display="none"
     let v3=(<HTMLInputElement>document.getElementById('v3')).style.display="none"
     let v5=(<HTMLInputElement>document.getElementById('v5')).style.display="block"
     const id=Number(id1);
-    this.service.updateUser({ id, name, surname, login, role,  password, courses, email, tel }  as User)
+    let courses=courses1.split(",")
+    this.service.updateUser({ id, name, surname, login, role, password, courses, email, tel }  as User)
     .subscribe();
     this.getUsers();
   }
 
 
-  savea(name: string, surname: string, login :string, role: string, password:string, courses:string, email:string, tel:string): void {
+  savea(name: string, surname: string, login :string, role: string, password:string, courses1:string, email:string, tel:string): void {
     let v1=(<HTMLInputElement>document.getElementById('v1')).style.display="none"
     let v2=(<HTMLInputElement>document.getElementById('v2')).style.display="block"
     let v4=(<HTMLInputElement>document.getElementById('v4')).style.display="none"
@@ -101,7 +96,7 @@ this.getUsers();
     surname = surname.trim();
     login = login.trim();
     role = role.trim();
-    courses = courses.trim();
+    let courses=courses1.split(",")
     email = email.trim();
     tel = tel.trim();
     if (!surname || !name || !login || !role || !courses || !email || !tel) { return; }
@@ -119,7 +114,7 @@ this.getUsers();
     (<HTMLInputElement>document.getElementById('login')).value=user.login;
     (<HTMLInputElement>document.getElementById('role')).value=user.role;
     (<HTMLInputElement>document.getElementById('password')).value=user.password;
-    (<HTMLInputElement>document.getElementById('courses')).value=user.courses;
+   // (<HTMLInputElement>document.getElementById('courses')).value=user.courses;
     (<HTMLInputElement>document.getElementById('email')).value=user.email;
     (<HTMLInputElement>document.getElementById('tel')).value=user.tel;
 

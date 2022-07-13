@@ -7,7 +7,7 @@ export interface User {
     login:string;
     role:string;
     password:string;
-    courses:string;
+    courses:string[];
     email:string;
     tel:string;
   }

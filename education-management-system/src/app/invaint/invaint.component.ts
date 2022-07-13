@@ -41,7 +41,7 @@ export class InvaintComponent implements OnInit {
       for( let i=0; i<this.users.length; i++){
         if (this.users[i].login==this.uLogin ){
           this.role=this.users[i].role;
-          this.uCours=this.users[i].courses;
+//this.uCours=this.users[i].courses;
           //console.log(this.users[i].login)
            break;
          }

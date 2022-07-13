@@ -4,4 +4,5 @@ export interface Cours {
     plan:string[];
     auth:string;
     test:string;
+    user:string[];
   }

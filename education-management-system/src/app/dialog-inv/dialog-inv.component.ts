@@ -47,10 +47,11 @@ time:number=0
     const surname=user.surname;
     const login=user.login;
     const role=user.role;
+    const password=user.password;
     const email=user.email;
     const tel=user.tel;
-    const courses=String(localStorage.getItem('idc')).split('"').join('');
-    this.service.updateUser({ id, name, surname, login, role, courses, email, tel }  as User)
+    const courses=(String(localStorage.getItem('idc')).split('"').join('')).split(",");
+    this.service.updateUser({ id, name, surname, login, role, password, courses, email, tel }  as User)
     .subscribe();
   }
 
