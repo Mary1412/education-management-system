@@ -4,4 +4,6 @@ import { Injectable } from "@angular/core";
 export class SomeDataService {
   data: number = 0
   role: string = ""
+  inv:number=1;
+  users:string[]=[];
 }

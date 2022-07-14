@@ -32,14 +32,13 @@ export class AppServiceService {
     return this.http.post<Cours>('/api/cours', cours);
   }
 
-  updateHero(cours: Cours): Observable<any> {
+  updateCours(cours: Cours): Observable<any> {
     return this.http.put('/api/cours', cours)
   }
 
 
   
-
-
+  
 
 
 

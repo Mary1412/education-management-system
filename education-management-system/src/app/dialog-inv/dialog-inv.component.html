@@ -9,14 +9,18 @@
 
 Chouse user
 
-<mat-card    *ngFor="let user of users |slice:1">
+<mat-card    *ngFor="let user of users |slice:1 | filter2: 'user'">
     
     <br>
     
       
-     <mat-checkbox> <a href="mailto: {{user.email}}?body=Link for invaint {{url}}" (click)="invaint(user)" >
+     <mat-checkbox > <a href="mailto: {{user.email}}?body=Link for invaint {{url}}" (click)="invaint(user)" >
        {{user.name}}<br>
        {{user.surname}}<br>
        {{user.login}}<br></a></mat-checkbox>
  
+       
       </mat-card>
+      <button  mat-raised-button color="primary" type="button" class="add-button" >
+        Add to cours
+        </button>

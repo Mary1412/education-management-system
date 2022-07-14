@@ -1,3 +1,4 @@
+import { User } from './users/user';
 import { Cours } from './courses/cours';
 
 import { Pipe, PipeTransform } from "@angular/core";
@@ -8,9 +9,9 @@ import { Pipe, PipeTransform } from "@angular/core";
 })
 
 export class FilterPipe2 implements PipeTransform{
-    transform(courses: Cours[],value:string) {
-        return courses.filter(cours =>{
-            return String(cours.id)?.includes(value)
+    transform(users: User[],value:string) {
+        return users.filter(user =>{
+            return String(user.role)?.includes(value)
         })
         
     }

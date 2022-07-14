@@ -126,8 +126,12 @@ this.getCourses();
     const idc = JSON.stringify(cours.id)
     localStorage.setItem('idc', idc)
 
+    this.someSrv.inv=cours.id;
+    this.someSrv.users=cours.user;
+
     dr.afterClosed().subscribe((result: any) => {
      })
+
     }
        
       
@@ -202,9 +206,9 @@ this.getCourses();
     let plan = plan1.split(",");
     let user = user1.split(",");
     let auth = this.auth.trim();
-    this.service.updateHero({ id, name, plan, auth, test, user}   as Cours)
+    this.service.updateCours({ id, name, plan, auth, test, user}   as Cours)
     .subscribe();
-    this.getCourses();
+   
     this.edited=0;
     this.buttonEdit=0;
     this.roundtn=1;

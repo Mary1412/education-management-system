@@ -1,6 +1,8 @@
+import { Cours } from './../courses/cours';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AppServiceService } from '../app-service.service';
+import { SomeDataService } from '../some-data.service';
 import { User } from '../users/user';
 
 @Component({
@@ -10,7 +12,7 @@ import { User } from '../users/user';
 })
 export class InvaintComponent implements OnInit {
 
-  constructor(private service:AppServiceService ) { }
+  constructor(private service:AppServiceService , private someSrv: SomeDataService) { }
 
   ngOnInit(): void {
     
@@ -46,8 +48,10 @@ export class InvaintComponent implements OnInit {
            break;
          }
       }
-      location.reload();
-      console.log("role "+this.role)
+
+
+   
+   
 
     const jsonData5 = JSON.stringify(this.role)
     localStorage.setItem('roleForE', jsonData5)

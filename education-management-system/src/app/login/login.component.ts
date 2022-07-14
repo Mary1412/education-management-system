@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppServiceService } from '../app-service.service';
+import { Cours } from '../courses/cours';
 import { SomeDataService } from '../some-data.service';
 import { User } from '../users/user';
 
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit {
   role:string="";
   uCours:string[] | undefined;
   checkEnter=0;
+
   
   logControl=new FormGroup({
     loginFormControl : new FormControl('', [Validators.required, Validators.pattern('^[а-яА-ЯёЁa-zA-Z0-9]+$')]),
@@ -41,6 +43,7 @@ export class LoginComponent implements OnInit {
 
   add1(){
    
+  
     
     
     this.service.getUsesr()
@@ -59,6 +62,14 @@ export class LoginComponent implements OnInit {
     
       if(this.password==this.uPassword){
         this.someSrv.data = 1
+        const id=this.someSrv.inv;
+        let stud ;
+        stud=this.someSrv.users;
+        stud.concat(this.uLogin)
+        const user=stud;
+     
+       this.service.updateCours({ id, user }  as Cours)
+       .subscribe();
         this.router.navigate(['/courses']);
       }
       else{
