@@ -80,7 +80,7 @@ this.getUsers();
     let v5=(<HTMLInputElement>document.getElementById('v5')).style.display="block"
     const id=Number(id1);
     let courses=courses1.split(",")
-    this.service.updateUser({ id, name, surname, login, role, password, courses, email, tel }  as User)
+    this.service.updateUser({ id, name, surname, login, role, password, email, tel }  as User)
     .subscribe();
     this.getUsers();
   }
@@ -100,7 +100,7 @@ this.getUsers();
     email = email.trim();
     tel = tel.trim();
     if (!surname || !name || !login || !role || !courses || !email || !tel) { return; }
-    this.service.addUsesr({ name, surname, login, role, password, courses, email, tel } as User)
+    this.service.addUsesr({ name, surname, login, role, password, email, tel } as User)
       .subscribe(user => {
         this.users.push(user);
       });

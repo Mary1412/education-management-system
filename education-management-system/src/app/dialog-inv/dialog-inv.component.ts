@@ -1,7 +1,13 @@
+import { isNgTemplate } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { AppServiceService } from '../app-service.service';
 import { Cours } from '../courses/cours';
+import { SomeDataService } from '../some-data.service';
 import { User } from '../users/user';
+
+
+
+
 
 @Component({
   selector: 'app-dialog-inv',
@@ -10,19 +16,21 @@ import { User } from '../users/user';
 })
 export class DialogInvComponent implements OnInit {
 
-  constructor(private service:AppServiceService) { }
+  constructor(private service:AppServiceService, private someSrv: SomeDataService) { }
 
   users: User[] = [];
   url:string="";
 
   ngOnInit(): void {
     this.getUsers();
+  
     }
 
   getUsers(): void {
     this.service.getUsesr()
     .subscribe(users => this.users = users);
   }
+
 
  url1() {
     this.url=""
@@ -51,8 +59,49 @@ time:number=0
     const email=user.email;
     const tel=user.tel;
     const courses=(String(localStorage.getItem('idc')).split('"').join('')).split(",");
-    this.service.updateUser({ id, name, surname, login, role, password, courses, email, tel }  as User)
+    this.service.updateUser({ id, name, surname, login, role, password,  email, tel }  as User)
     .subscribe();
   }
+
+
+
+
+
+
+
+
+
+
+  
+
+  allComplete: boolean = false;
+  ch:boolean=false;
+  inv:string[]=[]
+
+  updateAllComplete() {
+    
+   this.inv=[]
+   this.ch = this.users != null && this.users.every(t => t.courses);
+
+    this.users.forEach((item, index) =>{ 
+      if(item.courses==true){
+        this.inv.push(item.login)
+      }
+    })
+
+ this.someSrv.users=this.inv
+
+
+
+
+
+    }
+
+ 
+
+  
+
+
+
 
 }

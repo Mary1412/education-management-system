@@ -33,7 +33,9 @@ export class AppServiceService {
   }
 
   updateCours(cours: Cours): Observable<any> {
-    return this.http.put('/api/cours', cours)
+    const url = '/api/cours';
+
+    return this.http.put(url, cours)
   }
 
 

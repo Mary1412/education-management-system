@@ -10,7 +10,7 @@
   
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label for="new-hero"> Name: </mat-label>
-    <input matInput id="name" #name formControlName="name" /><br>
+    <input matInput id="name" [(ngModel)]="name2" #name formControlName="name" /><br>
     <mat-error *ngIf="cControl">
     required
     </mat-error>
@@ -19,7 +19,7 @@
 <div>
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label for="new-hero">Plan: </mat-label>
-    <textarea matInput id="plan" #plan formControlName="plan"></textarea>
+    <textarea matInput id="plan"  [(ngModel)]="plan2" #plan formControlName="plan"></textarea>
     <mat-error *ngIf="cControl">
       required
       </mat-error><br>
@@ -36,13 +36,13 @@
       required
       </mat-error>
     </mat-form-field>
-    <input matInput id="id1" #id1 style="visibility: hidden ;" /><br>
+    <input matInput id="id1" [(ngModel)]="id2" #id1 style="visibility: hidden ;" /><br>
   </div>
 
   <div>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label for="new-hero">User: </mat-label>
-      <textarea matInput id="plan" #user ></textarea>
+      <textarea matInput id="user" [(ngModel)]="user2" #user ></textarea>
       
       </mat-form-field>
   </div>
@@ -78,7 +78,7 @@
 
 <div class="tb" >
 <div *ngIf="role!='user'">
-<table mat-table  [dataSource]="pageSlice   | filter:authForUsers  |search: strsearch " class="mat-elevation-z8">
+<table mat-table  [dataSource]="courses   | filter:authForUsers  |search: strsearch " class="mat-elevation-z8">
 
 
   <ng-container matColumnDef="name">
@@ -178,3 +178,4 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table></div>
 </div>
+

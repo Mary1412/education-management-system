@@ -8,19 +8,18 @@
     </mat-form-field><br>
 
 Chouse user
+ <ul>
+              <li *ngFor="let user of users |slice:1 | filter2: 'user'" style=" list-style-type: none; ">
+                <mat-checkbox [(ngModel)]="user.courses"
+                             
+                              >
+                  {{user.login}}
+                </mat-checkbox>
+              </li>
+            </ul>
 
-<mat-card    *ngFor="let user of users |slice:1 | filter2: 'user'">
-    
-    <br>
-    
-      
-     <mat-checkbox > <a href="mailto: {{user.email}}?body=Link for invaint {{url}}" (click)="invaint(user)" >
-       {{user.name}}<br>
-       {{user.surname}}<br>
-       {{user.login}}<br></a></mat-checkbox>
- 
+            <button mat-dialog-close mat-raised-button color="primary" type="button" class="add-button" (click)="updateAllComplete()" >
+              Add to cours
+              </button>
+     
        
-      </mat-card>
-      <button  mat-raised-button color="primary" type="button" class="add-button" >
-        Add to cours
-        </button>

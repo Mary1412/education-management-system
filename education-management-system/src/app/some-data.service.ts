@@ -6,4 +6,11 @@ export class SomeDataService {
   role: string = ""
   inv:number=1;
   users:string[]=[];
+
+
+  name: string = ""
+  plan: string[] = []
+  auth: string = ""
+  test:  string = ""
+  users2:string[]=[];
 }

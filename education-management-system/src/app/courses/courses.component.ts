@@ -27,6 +27,12 @@ export class CoursesComponent implements OnInit {
   pageSlice2$!: Observable<Cours[]>;
   len=0;
 
+  id2=0
+  name2=""
+  plan2:string[]=[]
+  user2:string[]=[]
+  test2=""
+
   showU:Cours[] | any= [] ;
 
 
@@ -127,7 +133,12 @@ this.getCourses();
     localStorage.setItem('idc', idc)
 
     this.someSrv.inv=cours.id;
-    this.someSrv.users=cours.user;
+    this.someSrv.users2=cours.user;
+    this.someSrv.plan=cours.plan;
+    this.someSrv.test=cours.test;
+    this.someSrv.auth=cours.auth;
+    this.someSrv.name=cours.name;
+    
 
     dr.afterClosed().subscribe((result: any) => {
      })
@@ -202,7 +213,7 @@ this.getCourses();
   save(id1:string, name: string, plan1: string, test:string, user1:string): void {
     
     this.auth=String(localStorage.getItem('logForE')).split('"').join('');
-    const id=Number(id1);
+    const id=this.id2
     let plan = plan1.split(",");
     let user = user1.split(",");
     let auth = this.auth.trim();
@@ -253,6 +264,14 @@ this.getCourses();
     (<HTMLInputElement>document.getElementById('plan')).value=cours.plan;
     (<HTMLInputElement>document.getElementById('test')).value=cours.test;
     ((<HTMLInputElement>document.getElementById('id1')).value)=String(cours.id);*/
+
+    this.id2=cours.id;
+    this.name2=cours.name;
+    this.plan2=cours.plan;
+    this.user2=cours.user;
+    
+    
+   
   
     this.edited=1;
     this.buttonEdit=1;
