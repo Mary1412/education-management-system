@@ -7,7 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
-  { path: 'courses', component:CoursesComponent, /*canActivate: [AuthGuard]*/},
+  { path: 'courses', component:CoursesComponent, canActivate: [AuthGuard]},
   { path: 'login', component:LoginComponent},
   { path: String(localStorage.getItem('urlInv')).split('"').join(''), component:InvaintComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full'},

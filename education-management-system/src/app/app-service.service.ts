@@ -1,6 +1,6 @@
 import { Cours } from './courses/cours';
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from './users/user';
 
@@ -75,6 +75,10 @@ export class AppServiceService {
 
   updateUser(user: User): Observable<any> {
     return this.http.put('/api/users', user)
+  }
+
+  sendMessage(body: any){
+    return this.http.post("/api/send", body);
   }
 
 }

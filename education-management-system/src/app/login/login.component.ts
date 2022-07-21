@@ -40,12 +40,6 @@ export class LoginComponent implements OnInit {
   })
   
 
-  /*
-         name=""
-         plan:string[]=[]
-         user2:string[]=[]
-         auth=""
-         test=""*/
 
   add1(){
    
@@ -54,6 +48,7 @@ export class LoginComponent implements OnInit {
     
     this.service.getUsesr()
     .subscribe(users => {this.users = users;
+      console.log(users)
       
       for( let i=0; i<this.users.length; i++){
         if (this.users[i].login==this.uLogin ){
@@ -70,21 +65,7 @@ export class LoginComponent implements OnInit {
         this.someSrv.data = 1
         const id=this.someSrv.inv;
        
-     /*   
-        this.service.getCourses()
-    .subscribe(cours2 => {this.cours2 = cours2;
-      
-      for( let i=0; i<this.cours2.length; i++){
-        if (this.cours2[i].id==id ){
-        this.name=this.cours2[i].name;
-         this.plan=this.cours2[i].plan;
-         this.auth=this.cours2[i].auth;
-         this.test=this.cours2[i].test;
-         this.user2=this.cours2[i].user;
-         
-           break;
-         }
-      }})*/
+     
 
         let stud ;
         stud=this.someSrv.users;
@@ -96,14 +77,14 @@ export class LoginComponent implements OnInit {
         const auth=this.someSrv.auth;
         const test=this.someSrv.test;
 
-      alert(id)
-      alert(name)
+     
      
        this.service.updateCours({  id, name, plan, auth, test, user }  as Cours)
        .subscribe();
         this.router.navigate(['/courses']);
       }
       else{
+       
         this.errL=1
       }
         

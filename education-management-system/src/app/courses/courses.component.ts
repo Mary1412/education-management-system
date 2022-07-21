@@ -26,6 +26,7 @@ export class CoursesComponent implements OnInit {
     pageSlice: Cours[] = [];
   pageSlice2$!: Observable<Cours[]>;
   len=0;
+  lenU=0;
 
   id2=0
   name2=""
@@ -52,10 +53,12 @@ export class CoursesComponent implements OnInit {
   now:Date=new Date();
 
   cControl=new FormGroup({
-    name : new FormControl('', [Validators.required]),
-    plan : new FormControl('', [Validators.required]),
-    test : new FormControl('', [Validators.required])
+    nameFormControl : new FormControl('', [Validators.required]),
+    planFormControl : new FormControl('', [Validators.required]),
+    testFormControl : new FormControl('', [Validators.required])
   })
+
+
  
 
   constructor(public service:AppServiceService,  public dialog1: MatDialog , private someSrv: SomeDataService) { }
@@ -73,6 +76,7 @@ export class CoursesComponent implements OnInit {
         endIndex=this.courses.length;
     }
     this.pageSlice=this.courses.slice(startIndex, endIndex);
+    this.showU=this.courses.filter(item => item.user.find(item2 => item2 == this.auth) ).slice(startIndex, endIndex);
   }
 
 
@@ -91,8 +95,7 @@ export class CoursesComponent implements OnInit {
    
     
 
-    this.service.getCourses()
-   .subscribe(courses => this.pageSlice=courses.slice(0,3) );
+   
    
 
     
@@ -145,7 +148,8 @@ this.getCourses();
 
     }
        
-      
+     m1=0
+     m2=0 
 
  
   getCourses(): void {
@@ -159,6 +163,7 @@ this.getCourses();
       this.courses= courses;
 
       this.len=this.courses.length;
+      
     for( let i=0; i<this.courses.length; i++){
 
         if (Math.ceil( ((new Date(this.courses[i].test).getTime())-this.now.getTime())/ (1000 * 3600 * 24))<5 && Math.ceil( ((new Date(this.courses[i].test).getTime())-this.now.getTime())/ (1000 * 3600 * 24))>0){
@@ -173,14 +178,34 @@ this.getCourses();
     });
 
 
-    this.service.getCourses()
-   .subscribe(courses => this.pageSlice=courses.slice(0,3) );
 
  
-   
+    this.service.getCourses()
+   .subscribe(courses => {this.pageSlice=courses.slice(0,3) 
+    //this.len=this.pageSlice.length;
+    for( let i=0; i<this.pageSlice.length; i++){
+
+      if (Math.ceil( ((new Date(this.pageSlice[i].test).getTime())-this.now.getTime())/ (1000 * 3600 * 24))<5 && Math.ceil( ((new Date(this.pageSlice[i].test).getTime())-this.now.getTime())/ (1000 * 3600 * 24))>0){
+   this.m1=1
+      break;      
+    }
+    }
+        
+  
+  });
 
    this.service.getCourses()
-   .subscribe(courses => this.showU=courses.filter(item => item.user.find(item2 => item2 == this.auth) ));
+   .subscribe(courses => {this.showU=courses.filter(item => item.user.find(item2 => item2 == this.auth) ).slice(0,3)
+    for( let i=0; i<this.showU.length; i++){
+
+      if (Math.ceil( ((new Date(this.showU[i].test).getTime())-this.now.getTime())/ (1000 * 3600 * 24))<5 && Math.ceil( ((new Date(this.showU[i].test).getTime())-this.now.getTime())/ (1000 * 3600 * 24))>0){
+   this.m2=1
+      break;      
+    }
+    }
+    this.lenU=this.showU.length;
+  });
+
 
    
 
@@ -260,10 +285,7 @@ this.getCourses();
   
 
   edit(cours: Cours):Cours{
-  /* (<HTMLInputElement>document.getElementById('name')).value=cours.name;
-    (<HTMLInputElement>document.getElementById('plan')).value=cours.plan;
-    (<HTMLInputElement>document.getElementById('test')).value=cours.test;
-    ((<HTMLInputElement>document.getElementById('id1')).value)=String(cours.id);*/
+
 
     this.id2=cours.id;
     this.name2=cours.name;

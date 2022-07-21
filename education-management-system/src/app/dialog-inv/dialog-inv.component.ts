@@ -1,5 +1,6 @@
 import { isNgTemplate } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AppServiceService } from '../app-service.service';
 import { Cours } from '../courses/cours';
 import { SomeDataService } from '../some-data.service';
@@ -16,15 +17,22 @@ import { User } from '../users/user';
 })
 export class DialogInvComponent implements OnInit {
 
-  constructor(private service:AppServiceService, private someSrv: SomeDataService) { }
+  title = 'nodeMailerApp';
+  nodeMailerForm!: FormGroup; 
+
+  constructor(private service:AppServiceService, private someSrv: SomeDataService, private formBuilder:FormBuilder) { }
 
   users: User[] = [];
   url:string="";
 
   ngOnInit(): void {
     this.getUsers();
+    this.nodeMailerForm = this.formBuilder.group({
+      email:[null,[Validators.required]]
+   });
   
     }
+
 
   getUsers(): void {
     this.service.getUsesr()
@@ -61,6 +69,9 @@ time:number=0
     const courses=(String(localStorage.getItem('idc')).split('"').join('')).split(",");
     this.service.updateUser({ id, name, surname, login, role, password,  email, tel }  as User)
     .subscribe();
+
+
+    
   }
 
 
@@ -77,10 +88,12 @@ time:number=0
   allComplete: boolean = false;
   ch:boolean=false;
   inv:string[]=[]
+  invEmail:string[]=[]
 
   updateAllComplete() {
     
    this.inv=[]
+   this.invEmail=[]
    this.ch = this.users != null && this.users.every(t => t.courses);
 
     this.users.forEach((item, index) =>{ 
@@ -89,19 +102,31 @@ time:number=0
       }
     })
 
+    this.users.forEach((item, index) =>{ 
+      if(item.courses==true){
+        this.invEmail.push(item.email)
+      }
+    })
+
  this.someSrv.users=this.inv
-
-
-
+this.sendMail(this.invEmail)
 
 
     }
-
- 
-
   
 
+  
+ 
 
-
+    sendMail(inv:string[]){
+     
+      let reqObj = {
+        email:inv
+      }
+      console.log(reqObj)
+      this.service.sendMessage(reqObj).subscribe(data=>{
+        console.log(data);
+      })
+    }
 
 }
