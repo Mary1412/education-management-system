@@ -13,4 +13,15 @@ export class SomeDataService {
   auth: string = ""
   test:  string = ""
   users2:string[]=[];
+
+  buttonAdd=0
+  buttonEdit=0
+
+id2: number = 0
+ name2: string = "";
+ plan2: string[] = [];
+user2: string[] = [];
+test2:string=""
+
+  search:string=""
 }

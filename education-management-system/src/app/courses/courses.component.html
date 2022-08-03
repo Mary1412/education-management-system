@@ -1,80 +1,16 @@
 <app-menu (valueChanged)="strsearch = $event" ></app-menu>
-
-
-
-
-
-<div id="v1"  *ngIf="edited==1" >
-  <fieldset [formGroup]="cControl" style="border: 0px;">
-  <div>
-  
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label for="new-hero"> Name: </mat-label>
-    <input matInput id="name" #name formControlName="nameFormControl"  [(ngModel)]="name2" required /><br>
-    <mat-error *ngIf="cControl">
-    required
-    </mat-error>
-    </mat-form-field>
-</div>
-<div>
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label for="new-hero">Plan: </mat-label>
-    <textarea matInput id="plan"   #plan formControlName="planFormControl" [(ngModel)]="plan2" required></textarea>
-    <mat-error *ngIf="cControl">
-      required
-      </mat-error><br>
-    </mat-form-field>
-</div>
-
-
-
-<div>
-    <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label  for="new-hero"> Test: </mat-label>
-    <input type="date" matInput id="test" formControlName="testFormControl" [(ngModel)]="test2" #test required />
-    <mat-error *ngIf="cControl">
-      required
-      </mat-error>
-    </mat-form-field>
-    <input matInput id="id1" [(ngModel)]="id2" #id1 style="visibility: hidden ;" /><br>
-  </div>
-
-  <div>
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label for="new-hero">User: </mat-label>
-      <textarea matInput id="user" [(ngModel)]="user2" #user ></textarea>
-      
-      </mat-form-field>
-  </div>
- 
-
-    <button id="v3" *ngIf="buttonEdit==1"  mat-raised-button color="primary" type="button" class="add-button" (click)="save(id1.value, name.value, plan.value, test.value, user.value); plan.value=''; test.value=''; name.value=''; user.value='' ">
-      save
-    </button>
-    <button  id="v4"  *ngIf="buttonAdd==1"  [disabled]="!cControl.valid"  mat-raised-button color="primary" type="button" class="add-button" (click)="savea(name.value, plan.value, test.value, user.value); plan.value=''; test.value=''; name.value=''; user.value=''">
-    save
-    </button>
-  </fieldset>
 <br>
-</div>
 <div   id="vv33" style="display: block;" *ngIf="roundtn==1" align="right">
     <button id="v2" *ngIf="role=='admin' || role=='manager'"  style="display: block;" mat-fab color="primary" type="button" class="add-button" (click)="add();">
       <mat-icon>add</mat-icon>
     </button>
 </div>
-
-   
-
-  <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>  
-  
-
-  
-
+<mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>  
 <div class="tb" >
 <div *ngIf="role!='user'">
 
   <div *ngIf="m1==1">Test soon</div>
-  <div *ngIf="m2==1">Test soon</div>
+
 
   <mat-paginator [length]="len"
       [pageSize]="3"

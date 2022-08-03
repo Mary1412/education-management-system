@@ -11,6 +11,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { SomeDataService } from '../some-data.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { DialogForFormsComponent } from '../dialog-for-forms/dialog-for-forms.component';
 
 
 
@@ -22,8 +23,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class CoursesComponent implements OnInit {
 
 
-    courses: Cours[] = [];
-    pageSlice: Cours[] = [];
+  courses: Cours[] = [];
+  pageSlice: Cours[] = [];
   pageSlice2$!: Observable<Cours[]>;
   len=0;
   lenU=0;
@@ -52,11 +53,10 @@ export class CoursesComponent implements OnInit {
 
   now:Date=new Date();
 
-  cControl=new FormGroup({
-    nameFormControl : new FormControl('', [Validators.required]),
-    planFormControl : new FormControl('', [Validators.required]),
-    testFormControl : new FormControl('', [Validators.required])
-  })
+  edited=0;
+  buttonEdit=0;
+  buttonAdd=0;
+  roundtn=1;
 
 
  
@@ -85,21 +85,10 @@ export class CoursesComponent implements OnInit {
 
   ngOnInit(): void {
 
- //setTimeout(loading, 1000);
-
     this.auth=String(localStorage.getItem('logForE')).split('"').join('');
     this.uCours=String(localStorage.getItem('uCours')).split('"').join('');
 
     this.role=this.someSrv.role;
-
-   
-    
-
-   
-   
-
-    
-   
 
     if (this.role=="admin" || this.role=="rootadmin"){
 
@@ -109,8 +98,7 @@ export class CoursesComponent implements OnInit {
     if (this.role=="user"){
 
       this.uCours=String(localStorage.getItem('uCours')).split('"').join('');
-      
-      
+
     }
     if (this.role=="manager"){
 
@@ -119,12 +107,6 @@ export class CoursesComponent implements OnInit {
       this.roleForUsers=String(localStorage.getItem('roleForE')).split('"').join('');
       this.authForUsers=String(localStorage.getItem('logForE')).split('"').join('');
     }
-
-    
-
-
-
-
 this.getCourses();
   }
 
@@ -141,48 +123,30 @@ this.getCourses();
     this.someSrv.test=cours.test;
     this.someSrv.auth=cours.auth;
     this.someSrv.name=cours.name;
-    
-
+  
     dr.afterClosed().subscribe((result: any) => {
      })
-
     }
        
      m1=0
-     m2=0 
+    
 
  
   getCourses(): void {
- 
-    this.auth=String(localStorage.getItem('logForE')).split('"').join('');
-    
+    this.auth=String(localStorage.getItem('logForE')).split('"').join(''); 
     this.now= new Date();
     this.service.getCourses()
     .subscribe(courses => {
-
       this.courses= courses;
-
-      this.len=this.courses.length;
-      
+      this.len=this.courses.length; 
     for( let i=0; i<this.courses.length; i++){
-
         if (Math.ceil( ((new Date(this.courses[i].test).getTime())-this.now.getTime())/ (1000 * 3600 * 24))<5 && Math.ceil( ((new Date(this.courses[i].test).getTime())-this.now.getTime())/ (1000 * 3600 * 24))>0){
-      //  alert("You have a test" ) ;
         break;      
       }
       }
-
-
-     
-
     });
-
-
-
- 
     this.service.getCourses()
    .subscribe(courses => {this.pageSlice=courses.slice(0,3) 
-    //this.len=this.pageSlice.length;
     for( let i=0; i<this.pageSlice.length; i++){
 
       if (Math.ceil( ((new Date(this.pageSlice[i].test).getTime())-this.now.getTime())/ (1000 * 3600 * 24))<5 && Math.ceil( ((new Date(this.pageSlice[i].test).getTime())-this.now.getTime())/ (1000 * 3600 * 24))>0){
@@ -190,8 +154,6 @@ this.getCourses();
       break;      
     }
     }
-        
-  
   });
 
    this.service.getCourses()
@@ -199,16 +161,12 @@ this.getCourses();
     for( let i=0; i<this.showU.length; i++){
 
       if (Math.ceil( ((new Date(this.showU[i].test).getTime())-this.now.getTime())/ (1000 * 3600 * 24))<5 && Math.ceil( ((new Date(this.showU[i].test).getTime())-this.now.getTime())/ (1000 * 3600 * 24))>0){
-   this.m2=1
+   this.m1=1
       break;      
-    }
+      }
     }
     this.lenU=this.showU.length;
   });
-
-
-   
-
   }
 
 
@@ -219,89 +177,29 @@ this.getCourses();
     this.courses = this.courses.filter(c => c !== cours);
     this.service.deleteCours(cours.id).subscribe();
 this.getCourses();
-
    } })
-   
-   
-
   }
 
   
   add(): void {
-
-
-   this.edited=1;
-   this.buttonAdd=1;
-   this.roundtn=0;
-  
-  }
-  save(id1:string, name: string, plan1: string, test:string, user1:string): void {
-    
-    this.auth=String(localStorage.getItem('logForE')).split('"').join('');
-    const id=this.id2
-    let plan = plan1.split(",");
-    let user = user1.split(",");
-    let auth = this.auth.trim();
-    this.service.updateCours({ id, name, plan, auth, test, user}   as Cours)
-    .subscribe();
-   
-    this.edited=0;
-    this.buttonEdit=0;
-    this.roundtn=1;
-    
-this.getCourses();
-
-
+   let dr=this.dialog1.open(DialogForFormsComponent);
+    dr.afterClosed().subscribe((result: any) => {
+     })
+     this.someSrv.buttonAdd=1
   }
 
-  edited=0;
-  buttonEdit=0;
-  buttonAdd=0;
-  roundtn=1;
-
-  savea(name: string, plan1: string, test: string, user1:string): void {
-
-
-    this.auth=String(localStorage.getItem('logForE')).split('"').join('');
-
-    name = name.trim();
-    let plan = plan1.split(",");
-    let user = user1.split(",");
-    let auth = this.auth.trim();
-    test = test.trim();
-    if (!plan || !name || !test) { return; }
-    this.service.addCours({ name, plan, auth, test, user } as Cours)
-      .subscribe(cours => {
-        this.courses.push(cours);
-        this.getCourses();
-      });
-      this.edited=0;
-      this.buttonAdd=0;
-      this.roundtn=1;
-      
-this.getCourses();
-  }
-  
-  
 
   edit(cours: Cours):Cours{
-
-
-    this.id2=cours.id;
-    this.name2=cours.name;
-    this.plan2=cours.plan;
-    this.user2=cours.user;
-    
-    
-   
-  
-    this.edited=1;
-    this.buttonEdit=1;
-    this.roundtn=0;
-    
+    this.someSrv.buttonEdit=1
+    let dr=this.dialog1.open(DialogForFormsComponent);
+    dr.afterClosed().subscribe((result: any) => {
+     })
+    this.someSrv.id2=cours.id;
+    this.someSrv.name2=cours.name;
+    this.someSrv.plan2=cours.plan;
+    this.someSrv.user2=cours.user;
+    this.someSrv.test2=cours.test;
     return cours;
-  
-
   }
 
     displayedColumns: string[] = [ 'name', 'plan', 'test', 'menu'];

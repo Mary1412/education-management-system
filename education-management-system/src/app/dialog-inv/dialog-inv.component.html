@@ -7,12 +7,10 @@
     </mat-select>
     </mat-form-field><br>
 
-Chouse user
- <ul>
+      Chouse user
+          <ul>
               <li *ngFor="let user of users |slice:1 | filter2: 'user'" style=" list-style-type: none; ">
-                <mat-checkbox [(ngModel)]="user.courses"
-                             
-                              >
+                <mat-checkbox [(ngModel)]="user.courses">
                   {{user.login}}
                 </mat-checkbox>
               </li>
@@ -20,7 +18,7 @@ Chouse user
 
             <button mat-dialog-close mat-raised-button color="primary" type="button" class="add-button" (click)="updateAllComplete()" >
               Add to cours
-              </button>
+           </button>
      
        
          

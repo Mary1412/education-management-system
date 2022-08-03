@@ -46,12 +46,8 @@ export class DialogInvComponent implements OnInit {
     const url = JSON.stringify(this.url)
     localStorage.setItem('urlInv', url)
   }
-  
-
-time:number=0
-
-  invaint(user: User):void{
- 
+  time:number=0
+   invaint(user: User):void{
     this.url="http://localhost:4200/invaint";
     console.log(this.url);
     setTimeout(this.url1, 1000*this.time*60*60*24);
@@ -70,20 +66,8 @@ time:number=0
     this.service.updateUser({ id, name, surname, login, role, password,  email, tel }  as User)
     .subscribe();
 
-
-    
   }
 
-
-
-
-
-
-
-
-
-
-  
 
   allComplete: boolean = false;
   ch:boolean=false;
@@ -109,14 +93,11 @@ time:number=0
     })
 
  this.someSrv.users=this.inv
+
+
+
 this.sendMail(this.invEmail)
-
-
-    }
-  
-
-  
- 
+}
 
     sendMail(inv:string[]){
      

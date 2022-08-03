@@ -1,0 +1,50 @@
+<div id="v1" >
+  <fieldset [formGroup]="cControl" style="border: 0px;">
+  <div>
+  
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label for="new-hero"> Name: </mat-label>
+    <input matInput id="name" #name formControlName="nameFormControl"   required /><br>
+    <mat-error *ngIf="cControl">
+    required
+    </mat-error>
+    </mat-form-field>
+</div>
+<div>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label for="new-hero">Plan: </mat-label>
+    <textarea matInput id="plan"   #plan formControlName="planFormControl"  required></textarea>
+    <mat-error *ngIf="cControl">
+      required
+      </mat-error><br>
+    </mat-form-field>
+</div>
+
+
+
+<div>
+    <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label  for="new-hero"> Test: </mat-label>
+    <input type="date" matInput id="test" formControlName="testFormControl"  #test required />
+    <mat-error *ngIf="cControl">
+      required
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label for="new-hero">User: </mat-label>
+      <textarea matInput id="user"  #user ></textarea>
+      
+      </mat-form-field>
+  </div>
+
+
+    <button id="v3" mat-dialog-close  *ngIf="buttonEdit==1"  mat-raised-button color="primary" type="button" class="add-button" (click)="save( name.value, plan.value, test.value, user.value); plan.value=''; test.value=''; name.value=''; user.value='' ">
+      save
+    </button>
+    <button  id="v4" mat-dialog-close   *ngIf="buttonAdd==1"  [disabled]="!cControl.valid"  mat-raised-button color="primary" type="button" class="add-button" (click)="savea(name.value, plan.value, test.value, user.value); plan.value=''; test.value=''; name.value=''; user.value=''">
+    save
+    </button>
+</fieldset>

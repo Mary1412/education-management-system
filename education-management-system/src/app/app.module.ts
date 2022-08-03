@@ -33,6 +33,7 @@ import {MatTableModule} from '@angular/material/table';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { DialogForFormsComponent } from './dialog-for-forms/dialog-for-forms.component';
 
 
 
@@ -51,7 +52,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     InvaintComponent,
     SearchPipe,
     SearchUsersPipe,
-    DialogDeleteComponent
+    DialogDeleteComponent,
+    DialogForFormsComponent
     
   ],
   entryComponents:[DialogInvComponent],
