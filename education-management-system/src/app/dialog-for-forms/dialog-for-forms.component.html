@@ -41,10 +41,10 @@
   </div>
 
 
-    <button id="v3" mat-dialog-close  *ngIf="buttonEdit==1"  mat-raised-button color="primary" type="button" class="add-button" (click)="save( name.value, plan.value, test.value, user.value); plan.value=''; test.value=''; name.value=''; user.value='' ">
+    <button id="v3" mat-dialog-close routerLink="/edit"  *ngIf="buttonEdit==1"  mat-raised-button color="primary" type="button" class="add-button"  (click)="save( name.value, plan.value, test.value, user.value); plan.value=''; test.value=''; name.value=''; user.value='' ">
       save
     </button>
-    <button  id="v4" mat-dialog-close   *ngIf="buttonAdd==1"  [disabled]="!cControl.valid"  mat-raised-button color="primary" type="button" class="add-button" (click)="savea(name.value, plan.value, test.value, user.value); plan.value=''; test.value=''; name.value=''; user.value=''">
+    <button  id="v4" mat-dialog-close routerLink="/edit"  *ngIf="buttonAdd==1"  [disabled]="!cControl.valid"  mat-raised-button color="primary" type="button" class="add-button" (click)="savea(name.value, plan.value, test.value, user.value); plan.value=''; test.value=''; name.value=''; user.value=''">
     save
     </button>
 </fieldset>

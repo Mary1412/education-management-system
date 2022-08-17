@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { AppServiceService } from '../app-service.service';
 import { Cours } from '../courses/cours';
 import { SomeDataService } from '../some-data.service';
@@ -12,13 +13,14 @@ import { SomeDataService } from '../some-data.service';
 })
 export class DialogForFormsComponent implements OnInit {
 
-  constructor(public service:AppServiceService,  public dialog1: MatDialog , private someSrv: SomeDataService) { }
+  constructor(public service:AppServiceService,  public dialog1: MatDialog , private someSrv: SomeDataService, private router: Router) { }
 
   ngOnInit(): void {
 
     this.buttonAdd=this.someSrv.buttonAdd
     this.buttonEdit=this.someSrv.buttonEdit
-
+    this.someSrv.data = 1 
+    this.router.navigate(['/courses']);
    this.id2= this.someSrv.id2
    this.name2= this.someSrv.name2
     this.plan2=this.someSrv.plan2
@@ -35,16 +37,15 @@ export class DialogForFormsComponent implements OnInit {
 
   
 
-  getCourses(){
-    this.service.getCourses()
-   .subscribe(courses => {this.courses=courses})
-  }
+
 
   cControl=new FormGroup({
     nameFormControl : new FormControl('', [Validators.required]),
     planFormControl : new FormControl('', [Validators.required]),
     testFormControl : new FormControl('', [Validators.required])
   })
+
+
 
   
   save( name: string, plan1: string, test:string, user1:string): void {
@@ -56,14 +57,14 @@ export class DialogForFormsComponent implements OnInit {
     let auth = this.auth.trim();
     this.service.updateCours({ id, name, plan, auth, test, user}   as Cours)
     .subscribe();
-   
+    this.someSrv.data = 1
+ 
     this.edited=0;
     this.someSrv.buttonEdit=0;
     this.roundtn=1;
-    
-this.getCourses();
-
-
+ 
+  
+ 
   }
 
   edited=0;
@@ -86,13 +87,13 @@ this.getCourses();
     if (!plan || !name || !test) { return; }
     this.service.addCours({ name, plan, auth, test, user } as Cours)
       .subscribe(cours => {
-        this.courses.push(cours);
-        this.getCourses();
+      
+        this.someSrv.data = 1
       });
       this.edited=0;
       this.someSrv.buttonAdd=0;
       this.roundtn=1;
-      
-this.getCourses();
+     
+
   }
 }

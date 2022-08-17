@@ -21,9 +21,9 @@ export class AppServiceService {
       
   }
 
-  deleteCours(id: number): Observable<Cours> {
+  deleteCours(id: any): Observable<Cours> {
     const url = `/api/cours/${id}`;
-
+  
     return this.http.delete<Cours>(url);
   }
 
@@ -62,7 +62,7 @@ export class AppServiceService {
       
   }
 
-  deleteUsesr(id: number): Observable<User> {
+  deleteUsesr(id: any): Observable<User> {
     const url = `/api/users/${id}`;
 
     return this.http.delete<User>(url);

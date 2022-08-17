@@ -84,6 +84,7 @@ export class CoursesComponent implements OnInit {
  
 
   ngOnInit(): void {
+    this.someSrv.data = 0
 
     this.auth=String(localStorage.getItem('logForE')).split('"').join('');
     this.uCours=String(localStorage.getItem('uCours')).split('"').join('');
@@ -138,6 +139,7 @@ this.getCourses();
     this.service.getCourses()
     .subscribe(courses => {
       this.courses= courses;
+      console.log("c ", courses)
       this.len=this.courses.length; 
     for( let i=0; i<this.courses.length; i++){
         if (Math.ceil( ((new Date(this.courses[i].test).getTime())-this.now.getTime())/ (1000 * 3600 * 24))<5 && Math.ceil( ((new Date(this.courses[i].test).getTime())-this.now.getTime())/ (1000 * 3600 * 24))>0){
@@ -175,8 +177,10 @@ this.getCourses();
     dr.afterClosed().subscribe((result: any) => {
  if(result){
     this.courses = this.courses.filter(c => c !== cours);
-    this.service.deleteCours(cours.id).subscribe();
-this.getCourses();
+   
+    this.service.deleteCours(cours._id).subscribe();
+    this.someSrv.data = 1
+
    } })
   }
 
@@ -194,7 +198,7 @@ this.getCourses();
     let dr=this.dialog1.open(DialogForFormsComponent);
     dr.afterClosed().subscribe((result: any) => {
      })
-    this.someSrv.id2=cours.id;
+    this.someSrv.id2=cours._id;
     this.someSrv.name2=cours.name;
     this.someSrv.plan2=cours.plan;
     this.someSrv.user2=cours.user;

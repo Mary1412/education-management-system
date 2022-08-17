@@ -34,6 +34,7 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { DialogForFormsComponent } from './dialog-for-forms/dialog-for-forms.component';
+import { EditComponent } from './edit/edit.component';
 
 
 
@@ -53,7 +54,8 @@ import { DialogForFormsComponent } from './dialog-for-forms/dialog-for-forms.com
     SearchPipe,
     SearchUsersPipe,
     DialogDeleteComponent,
-    DialogForFormsComponent
+    DialogForFormsComponent,
+    EditComponent
     
   ],
   entryComponents:[DialogInvComponent],

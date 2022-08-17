@@ -3,6 +3,7 @@ import { emitDistinctChangesOnlyDefaultValue, ThisReceiver } from '@angular/comp
 import { AppServiceService } from '../app-service.service';
 import { User } from './user';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { SomeDataService } from '../some-data.service';
 
 
 
@@ -28,19 +29,9 @@ export class UsersComponent implements OnInit {
     tel : new FormControl('', [Validators.required])
   })
 
-  constructor(private service:AppServiceService ) { }
+  constructor(private service:AppServiceService, private someSrv: SomeDataService ) { }
 
-  ngOnInit(): void {/*
-    this.role=String(localStorage.getItem('roleForE')).split('"').join('');
-    if (this.role=="admin"){
-      (<HTMLInputElement>document.getElementById('v22')).style.display="inline";
-    }
-    if (this.role=="user"){
-      (<HTMLInputElement>document.getElementById('v22')).style.display="none";
-    }
-    if (this.role=="manager"){
-      (<HTMLInputElement>document.getElementById('v22')).style.display="none";
-    }*/
+  ngOnInit(): void {
 
     this.role=String(localStorage.getItem('roleForE')).split('"').join('');
    
@@ -61,7 +52,7 @@ this.getUsers();
 
   delete(user: User): void {
     this.users = this.users.filter(c => c !== user);
-    this.service.deleteUsesr(user.id).subscribe();
+    this.service.deleteUsesr(user._id).subscribe();
   }
 
   
@@ -78,11 +69,14 @@ this.getUsers();
     let v1=(<HTMLInputElement>document.getElementById('v1')).style.display="none"
     let v3=(<HTMLInputElement>document.getElementById('v3')).style.display="none"
     let v5=(<HTMLInputElement>document.getElementById('v5')).style.display="block"
-    const id=Number(id1);
+    const _id=id1;
     let courses=courses1.split(",")
-    this.service.updateUser({ id, name, surname, login, role, password, email, tel }  as User)
+    this.service.updateUser({ _id, name, surname, login, role, password, email, tel }  as User)
     .subscribe();
+
     this.getUsers();
+    this.someSrv.data = 1
+    location.reload() 
   }
 
 
@@ -118,7 +112,8 @@ this.getUsers();
     (<HTMLInputElement>document.getElementById('email')).value=user.email;
     (<HTMLInputElement>document.getElementById('tel')).value=user.tel;
 
-    ((<HTMLInputElement>document.getElementById('id1')).value)=String(user.id);
+    ((<HTMLInputElement>document.getElementById('id1')).value)=user._id;
+
     let v1=(<HTMLInputElement>document.getElementById('v1')).style.display="block"
     let v4=(<HTMLInputElement>document.getElementById('v3')).style.display="block"
     let v5=(<HTMLInputElement>document.getElementById('v5')).style.display="none"

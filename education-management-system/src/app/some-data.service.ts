@@ -17,7 +17,7 @@ export class SomeDataService {
   buttonAdd=0
   buttonEdit=0
 
-id2: number = 0
+id2: any
  name2: string = "";
  plan2: string[] = [];
 user2: string[] = [];

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { SomeDataService } from '../some-data.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class MenuComponent implements OnInit {
     this.valueChanged.emit(this.strsearch);
   }
 
-  constructor(private someSrv: SomeDataService) { }
+  constructor(private someSrv: SomeDataService, private router: Router) { }
 
   role:string="";
   login="";
@@ -30,4 +31,12 @@ export class MenuComponent implements OnInit {
     
   }
 
+  course(){
+    this.router.navigate(['/courses']);
+  }
+
+
+  users(){
+    this.router.navigate(['/courses']);
+  }
 }
